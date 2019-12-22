@@ -1,16 +1,21 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" class="container-fluid">
+    <div id="nav" class="row">
+      <div class="col-12 d-flex justify-content-between">
+        <img class="bug-logo" src="./assets/sm-bug.png" />
+        <router-link to="/">
+          <h2>BugTracker(home)</h2>
+        </router-link>
+        <img class="bug-logo" src="./assets/sm-bug.png" />
+      </div>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -19,6 +24,7 @@
 
 #nav {
   padding: 30px;
+  background-color: rgb(0, 128, 0, 0.6);
 }
 
 #nav a {
@@ -27,6 +33,11 @@
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: burlywood;
+}
+.bug-logo {
+  height: 30px;
+  width: 31px;
+  color: white;
 }
 </style>
