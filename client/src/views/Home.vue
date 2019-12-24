@@ -7,14 +7,21 @@
       </div>
       <div class="col-12" v-if="showForm">
         <div id="form">
-          <form class="form-group">
+          <form class="form-group" @submit="addBug">
             <div>
               Title:
-              <input class="form-control" required type="text" placeholder="Title of Bug" />
+              <input
+                v-model="newBug.title"
+                class="form-control"
+                required
+                type="text"
+                placeholder="Title of Bug"
+              />
             </div>
             <div>
               Reporter:
               <input
+                v-model="newBug.reportedBy"
                 class="form-control"
                 required
                 type="text"
@@ -24,6 +31,7 @@
             <div>
               Problem:
               <textarea
+                v-model="newBug.description"
                 class="form-control"
                 cols="30"
                 rows="3"
@@ -38,14 +46,15 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <table v-for="bug in bugs" :key="bug.id" style="width:100%">
+        <table style="width:100%">
+          <!-- v-for="bug in bugs" :key="bug.id" -->
           <tr>
             <th>Title</th>
             <th>Reported By</th>
             <th>Status</th>
             <th>Last Modified</th>
           </tr>
-          <bug :bugData="bug" />
+          <!-- <bug :bugData="bug" /> -->
           <tr>
             <td>James</td>
             <td>Tiki</td>
@@ -56,30 +65,6 @@
             <td>Mike</td>
             <td>Bean</td>
             <td>27</td>
-            <td>05/22/2018</td>
-          </tr>
-          <tr>
-            <td>Daina</td>
-            <td>Smith</td>
-            <td>35</td>
-            <td>05/22/2008</td>
-          </tr>
-          <tr>
-            <td>Tom</td>
-            <td>Sawayer</td>
-            <td>50</td>
-            <td>05/22/2018</td>
-          </tr>
-          <tr>
-            <td>Viki</td>
-            <td>Vini</td>
-            <td>19</td>
-            <td>04/12/2018</td>
-          </tr>
-          <tr>
-            <td>Jill</td>
-            <td>Smith</td>
-            <td>50</td>
             <td>05/22/2018</td>
           </tr>
         </table>
@@ -97,7 +82,12 @@ export default {
   name: "home",
   data() {
     return {
-      showForm: false
+      showForm: false,
+      newBug: {
+        title: "",
+        reportedBy: "",
+        description: ""
+      }
     };
   },
   methods: {
@@ -107,6 +97,16 @@ export default {
       } else if (this.showForm == true) {
         this.showForm = false;
       }
+    },
+    addBug() {
+      let bug = { ...this.newBug };
+      debugger;
+      this.$store.dispatch("addBug", bug);
+      this.newBug = {
+        title: "",
+        reportedBy: "",
+        description: ""
+      };
     }
   },
   components: {
