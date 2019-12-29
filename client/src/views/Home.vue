@@ -47,26 +47,13 @@
     <div class="row">
       <div class="col-12">
         <table style="width:100%">
-          <!-- v-for="bug in bugs" :key="bug.id" -->
           <tr>
             <th>Title</th>
             <th>Reported By</th>
             <th>Status</th>
             <th>Last Modified</th>
           </tr>
-          <!-- <bug :bugData="bug" /> -->
-          <tr>
-            <td>James</td>
-            <td>Tiki</td>
-            <td>20</td>
-            <td>07/22/2017</td>
-          </tr>
-          <tr>
-            <td>Mike</td>
-            <td>Bean</td>
-            <td>27</td>
-            <td>05/22/2018</td>
-          </tr>
+          <bug v-for="bug in bugs" :key="bug.id" :bugData="bug" />
         </table>
       </div>
     </div>
@@ -80,6 +67,9 @@ import Bug from "@/components/BugList.vue";
 
 export default {
   name: "home",
+  mounted() {
+    this.$store.dispatch("getBugs");
+  },
   data() {
     return {
       showForm: false,
@@ -100,13 +90,21 @@ export default {
     },
     addBug() {
       let bug = { ...this.newBug };
-      debugger;
       this.$store.dispatch("addBug", bug);
+      this.$router.push({
+        name: "bugDetails",
+        params: { id: this.$store.state.activeBug.id }
+      });
       this.newBug = {
         title: "",
         reportedBy: "",
         description: ""
       };
+    }
+  },
+  computed: {
+    bugs() {
+      return this.$store.state.bugs;
     }
   },
   components: {

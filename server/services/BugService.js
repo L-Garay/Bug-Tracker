@@ -6,13 +6,15 @@ const _repository = mongoose.model("Bug", Bug);
 
 class BugService {
   async closeBug(id) {
-    let data = await _repository.findByIdAndUpdate(
+    let data = await _repository.findOneAndUpdate(
       { _id: id },
-      { closed: true }
+      { closed: true },
+      { new: true }
     );
     if (!data) {
       throw new ApiError("Invalid ID", 400);
     }
+    return data;
   }
   async editBug(body, id) {
     let data = await _repository.findOneAndUpdate(

@@ -58,7 +58,7 @@ export default class BugController {
   async closeBug(req, res, next) {
     try {
       let data = await bugService.closeBug(req.params.id);
-      return res.send("Bug Squashed");
+      return res.send(data);
     } catch (error) {
       next(error);
     }
