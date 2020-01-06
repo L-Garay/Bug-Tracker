@@ -41,4 +41,7 @@ export default {
 .open {
   color: greenyellow;
 }
+.bug {
+  color: black;
+}
 </style>

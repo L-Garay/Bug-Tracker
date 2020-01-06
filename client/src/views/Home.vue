@@ -50,7 +50,7 @@
           <tr>
             <th>Title</th>
             <th>Reported By</th>
-            <th>Status</th>
+            <th @click="checkList">Status</th>
             <th>Last Modified</th>
           </tr>
           <bug v-for="bug in bugs" :key="bug.id" :bugData="bug" />
@@ -73,6 +73,7 @@ export default {
   data() {
     return {
       showForm: false,
+      listOrder: true,
       newBug: {
         title: "",
         reportedBy: "",
@@ -100,6 +101,37 @@ export default {
         reportedBy: "",
         description: ""
       };
+    },
+    checkList() {
+      if (this.listOrder == true) {
+        this.sortList1();
+        this.listOrder = false;
+      } else if (this.listOrder == false) {
+        this.sortList2();
+        this.listOrder = true;
+      }
+    },
+    sortList1() {
+      this.$store.state.bugs.sort(function(a, b) {
+        if (a.closed < b.closed) {
+          return -1;
+        } else if (a.closed > b.closed) {
+          return 1;
+        } else if (a.closed == b.closed) {
+          return 0;
+        }
+      });
+    },
+    sortList2() {
+      this.$store.state.bugs.sort(function(a, b) {
+        if (a.closed < b.closed) {
+          return 1;
+        } else if (a.closed > b.closed) {
+          return -1;
+        } else if (a.closed == b.closed) {
+          return 0;
+        }
+      });
     }
   },
   computed: {

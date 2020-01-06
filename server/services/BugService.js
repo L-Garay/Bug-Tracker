@@ -16,13 +16,11 @@ class BugService {
     }
     return data;
   }
-  async editBug(body, id) {
+  async editBug(id, update) {
     let data = await _repository.findOneAndUpdate(
       { _id: id, closed: false },
-      body,
-      {
-        new: true
-      }
+      { description: update },
+      { new: true }
     );
     return data;
   }

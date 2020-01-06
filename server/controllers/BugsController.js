@@ -49,7 +49,7 @@ export default class BugController {
   }
   async editBug(req, res, next) {
     try {
-      let data = await bugService.editBug(req.body, req.params.id);
+      let data = await bugService.editBug(req.params.id, req.body.description);
       return res.send(data);
     } catch (error) {
       next(error);

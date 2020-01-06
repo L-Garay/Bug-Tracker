@@ -61,19 +61,14 @@ export default new Vuex.Store({
       dispatch("getNotes", note.bugId);
     },
     async closeBug({ commit, dispatch }, id) {
-      debugger;
       let res = await _api.delete("bugs/" + id);
       commit("setActiveBug", res.data);
     },
     async editBug({ commit, dispatch }, bugData) {
-      // console.log(bugData.description);
-      // console.log(bugData.id);
-      // debugger;
-      // let bugToUpdate = this.state.bugs.find(bug => bug.id == bugData.id);
-      // console.log(bugToUpdate);
-      // bugToUpdate.description = bugData.description;
-      debugger;
-      let res = await _api.put("bugs/" + bugData.id, bugData.description);
+      console.log(bugData.description);
+      console.log(bugData.id);
+
+      let res = await _api.put("bugs/" + bugData.id, bugData);
       commit("setActiveBug", res.data);
     }
   },

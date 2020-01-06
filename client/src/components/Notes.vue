@@ -4,7 +4,6 @@
     <td>{{noteData.content}}</td>
     <td @click="deleteNote">
       <i class="far fa-trash-alt"></i>
-      <p>{{noteData.id}}</p>
     </td>
   </tr>
 </template>
@@ -15,11 +14,30 @@ export default {
   props: ["noteData"],
   methods: {
     deleteNote() {
-      let note = {
-        noteId: this.noteData.id,
-        bugId: this.noteData.bug
-      };
-      this.$store.dispatch("deleteNote", note);
+      swal({
+        title: "Are you sure you want to delete note?",
+        text:
+          "Once deleted, you will not be able to recover this super important note!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          swal(
+            "Poof! Your imaginary file has been totally deleted and not kept on our private server for our own persoanl use!",
+            {
+              icon: "success"
+            }
+          );
+          let note = {
+            noteId: this.noteData.id,
+            bugId: this.noteData.bug
+          };
+          this.$store.dispatch("deleteNote", note);
+        } else {
+          swal("Your imaginary file is safe!...for now");
+        }
+      });
     }
   }
 };

@@ -5,7 +5,10 @@
         <h1>Title: {{bug.title}}</h1>
         <div class="d-flex flex-row justify-content-between">
           <h5>Reported By: {{bug.reportedBy}}</h5>
-          <p>Status: {{bug.closed}}</p>
+          <div class="d-flex">
+            Status:
+            <p v-bind:class="{closed: isClosed, open: isOpen}">{{bug.closed}}</p>
+          </div>
         </div>
         <p>{{bug.description}}</p>
         <div>
@@ -84,6 +87,8 @@ export default {
     return {
       showForm: false,
       editBugForm: false,
+      isOpen: true,
+      isClosed: false,
       newNote: {
         reportedBy: "",
         content: "",
@@ -123,15 +128,33 @@ export default {
       };
     },
     closeBug() {
-      let bugId = this.$route.params.id;
-      this.$store.dispatch("closeBug", bugId);
+      swal({
+        title: "Are you sure?",
+        text:
+          "Once deleted, you will not be able to recover this super important bug!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          swal(
+            "Poof! Your imaginary bug has been squashed and he leaves behind a wife and two kids....",
+            {
+              icon: "success"
+            }
+          );
+          let bugId = this.$route.params.id;
+          this.$store.dispatch("closeBug", bugId);
+        } else {
+          swal("Your imaginary file is safe...ly in our possession still ");
+        }
+      });
     },
     editBug() {
       let editedBug = {
         description: this._data.editedBug.description,
         id: this.$route.params.id
       };
-      debugger;
       this.$store.dispatch("editBug", editedBug);
       this.editedBug = {
         description: ""
@@ -141,6 +164,13 @@ export default {
   mounted() {
     this.$store.dispatch("getBugById", this.$route.params.id);
     this.$store.dispatch("getNotes", this.$route.params.id);
+    if (this.bug.closed == false) {
+      this.isOpen = true;
+      this.isClosed = false;
+    } else if (this.bug.closed == true) {
+      this.isOpen = false;
+      this.isClosed = true;
+    }
   },
   computed: {
     bug() {
@@ -162,5 +192,11 @@ export default {
 }
 .bottom-border {
   border-bottom: 3px solid yellow;
+}
+.closed {
+  color: red;
+}
+.open {
+  color: greenyellow;
 }
 </style>
