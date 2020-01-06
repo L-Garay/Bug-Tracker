@@ -2,22 +2,28 @@
   <div class="container-fluid bugDetails">
     <div class="row">
       <div class="col-6 details">
-        <h1>Title: {{bug.title}}</h1>
+        <h1>Title: {{ bug.title }}</h1>
         <div class="d-flex flex-row justify-content-between">
-          <h5>Reported By: {{bug.reportedBy}}</h5>
+          <h5>Reported By: {{ bug.reportedBy }}</h5>
           <div class="d-flex">
             Status:
-            <p v-bind:class="{closed: isClosed, open: isOpen}">{{bug.closed}}</p>
+            <p v-bind:class="{ closed: bug.closed, open: !bug.closed }">
+              {{ bug.closed ? "Closed" : "Open" }}
+            </p>
           </div>
         </div>
-        <p>{{bug.description}}</p>
+        <p>{{ bug.description }}</p>
         <div>
           <button
             @click="toggleBugEdit"
             class="btn btn-sm btn-info float-left"
             type="button"
-          >Edit Bug</button>
-          <button @click="closeBug" class="btn btn-sm btn-danger float-right">Close Bug</button>
+          >
+            Edit Bug
+          </button>
+          <button @click="closeBug" class="btn btn-sm btn-danger float-right">
+            Close Bug
+          </button>
         </div>
         <div v-if="editBugForm" class="editBugForm">
           <form @submit="editBug" class="form-group">
@@ -30,7 +36,9 @@
               maxlength="300"
               placeholder="What you want"
             ></textarea>
-            <button class="btn btn-sm btn-success" type="submit">Submit Bug</button>
+            <button class="btn btn-sm btn-success" type="submit">
+              Submit Bug
+            </button>
           </form>
         </div>
       </div>
@@ -38,7 +46,13 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-between">
             <h2 class="bottom-border">Notes</h2>
-            <button @click="toggleForm" class="btn btn-sm btn-success" type="button">Add Note</button>
+            <button
+              @click="toggleForm"
+              class="btn btn-sm btn-success"
+              type="button"
+            >
+              Add Note
+            </button>
           </div>
           <div class="col-12 mb-4" v-if="showForm">
             <div id="form">
@@ -60,7 +74,9 @@
                   maxlength="300"
                   placeholder="What you want"
                 ></textarea>
-                <button class="btn btn-sm btn-success" type="submit">Submit Note</button>
+                <button class="btn btn-sm btn-success" type="submit">
+                  Submit Note
+                </button>
               </form>
             </div>
           </div>

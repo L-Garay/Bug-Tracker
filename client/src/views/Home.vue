@@ -3,11 +3,13 @@
     <div class="row">
       <div class="col-12 d-flex justify-content-between pt-3">
         <h2>Current Bug Report</h2>
-        <button class="btn btn-success" type="button" @click="toggleForm">Add a Bug</button>
+        <button class="btn btn-success" type="button" @click="toggleForm">
+          Add a Bug
+        </button>
       </div>
       <div class="col-12" v-if="showForm">
         <div id="form">
-          <form class="form-group" @submit="addBug">
+          <form class="form-group" @submit.prevent="addBug">
             <div>
               Title:
               <input
@@ -39,7 +41,9 @@
                 placeholder="Describe the Problem"
               ></textarea>
             </div>
-            <button class="btn btn-success bug-submit-btn" type="submit">Submit Bug</button>
+            <button class="btn btn-success bug-submit-btn" type="submit">
+              Submit Bug
+            </button>
           </form>
         </div>
       </div>
@@ -92,10 +96,6 @@ export default {
     addBug() {
       let bug = { ...this.newBug };
       this.$store.dispatch("addBug", bug);
-      this.$router.push({
-        name: "bugDetails",
-        params: { id: this.$store.state.activeBug.id }
-      });
       this.newBug = {
         title: "",
         reportedBy: "",

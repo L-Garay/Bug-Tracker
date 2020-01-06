@@ -3,12 +3,15 @@
     <td>
       <router-link
         class="bug"
-        :to="{name: 'bugDetails', params: {id: bugData.id}}"
-      >{{bugData.title}}</router-link>
+        :to="{ name: 'bugDetails', params: { id: bugData.id } }"
+        >{{ bugData.title }}</router-link
+      >
     </td>
-    <td>{{bugData.reportedBy}}</td>
-    <td v-bind:class="{closed: isClosed, open: isOpen}">{{bugData.closed}}</td>
-    <td>{{bugData.updatedAt}}</td>
+    <td>{{ bugData.reportedBy }}</td>
+    <td v-bind:class="{ closed: isClosed, open: isOpen }">
+      {{ bugData.closed ? "Closed" : "Open" }}
+    </td>
+    <td>{{ bugData.updatedAt | formatDate }}</td>
   </tr>
 </template>
 
