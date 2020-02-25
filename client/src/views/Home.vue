@@ -188,7 +188,7 @@ th {
   color: yellow;
 }
 .tableArea {
-  background-color: rgb(255, 255, 255, 0.4);
+  background-color: rgb(255, 255, 255, 0.3);
   max-height: 80vh;
 }
 </style>
