@@ -4,13 +4,10 @@
       <router-link
         class="bug"
         :to="{ name: 'bugDetails', params: { id: bugData.id } }"
-        >{{ bugData.title }}</router-link
-      >
+      >{{ bugData.title }}</router-link>
     </td>
     <td>{{ bugData.reportedBy }}</td>
-    <td v-bind:class="{ closed: isClosed, open: isOpen }">
-      {{ bugData.closed ? "Closed" : "Open" }}
-    </td>
+    <td v-bind:class="{ closed: isClosed, open: isOpen }">{{ bugData.closed ? "Closed" : "Open" }}</td>
     <td>{{ bugData.updatedAt | formatDate }}</td>
   </tr>
 </template>
@@ -45,6 +42,11 @@ export default {
   color: greenyellow;
 }
 .bug {
+  color: black;
+}
+tr td {
+  text-shadow: 1pt 1pt 1pt grey;
+  font-size: 1.2rem;
   color: black;
 }
 </style>

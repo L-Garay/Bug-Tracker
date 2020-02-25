@@ -3,54 +3,73 @@
     <div class="row">
       <div class="col-12 d-flex justify-content-between pt-3">
         <h2>Current Bug Report</h2>
-        <button class="btn btn-success" type="button" @click="toggleForm">
-          Add a Bug
-        </button>
+        <button
+          class="btn btn-success"
+          type="button"
+          data-toggle="modal"
+          data-target="#modal"
+        >Add a Bug</button>
       </div>
-      <div class="col-12" v-if="showForm">
-        <div id="form">
-          <form class="form-group" @submit.prevent="addBug">
-            <div>
-              Title:
-              <input
-                v-model="newBug.title"
-                class="form-control"
-                required
-                type="text"
-                placeholder="Title of Bug"
-              />
+      <div
+        class="modal"
+        id="modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div>
-              Reporter:
-              <input
-                v-model="newBug.reportedBy"
-                class="form-control"
-                required
-                type="text"
-                placeholder="Who's reporting the Bug"
-              />
+            <div class="modal-body">
+              <form class="form-group" @submit.prevent="addBug">
+                <div>
+                  Title:
+                  <input
+                    v-model="newBug.title"
+                    class="form-control"
+                    required
+                    type="text"
+                    placeholder="Title of Bug"
+                  />
+                </div>
+                <div>
+                  Reporter:
+                  <input
+                    v-model="newBug.reportedBy"
+                    class="form-control"
+                    required
+                    type="text"
+                    placeholder="Who's reporting the Bug"
+                  />
+                </div>
+                <div>
+                  Problem:
+                  <textarea
+                    v-model="newBug.description"
+                    class="form-control"
+                    cols="30"
+                    rows="3"
+                    maxlength="300"
+                    placeholder="Describe the Problem"
+                  ></textarea>
+                </div>
+                <button class="btn btn-success bug-submit-btn" type="submit">Submit Bug</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </form>
             </div>
-            <div>
-              Problem:
-              <textarea
-                v-model="newBug.description"
-                class="form-control"
-                cols="30"
-                rows="3"
-                maxlength="300"
-                placeholder="Describe the Problem"
-              ></textarea>
-            </div>
-            <button class="btn btn-success bug-submit-btn" type="submit">
-              Submit Bug
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-12">
-        <table style="width:100%">
+        <table class="tableArea" style="width:100%">
           <tr>
             <th>Title</th>
             <th>Reported By</th>
@@ -96,6 +115,8 @@ export default {
     addBug() {
       let bug = { ...this.newBug };
       this.$store.dispatch("addBug", bug);
+      $("body").removeClass("modal-open");
+      $(".modal-backdrop").remove();
       this.newBug = {
         title: "",
         reportedBy: "",
@@ -152,7 +173,9 @@ table {
 th {
   border-bottom: 2px solid green;
   border-collapse: collapse;
+  font-size: 1.75rem;
 }
+
 #form {
   padding: 10pt 5pt 0pt 5pt;
   border: 2px solid yellow;
@@ -163,5 +186,9 @@ th {
 .bug-submit-btn {
   margin: 15px 0 0 0;
   color: yellow;
+}
+.tableArea {
+  background-color: rgb(255, 255, 255, 0.4);
+  max-height: 80vh;
 }
 </style>

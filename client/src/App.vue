@@ -4,12 +4,14 @@
       <div class="col-12 d-flex justify-content-between">
         <img class="bug-logo" src="./assets/sm-bug.png" />
         <router-link to="/">
-          <h2>BugTracker(home)</h2>
+          <h2>BugTracker</h2>
         </router-link>
         <img class="bug-logo" src="./assets/sm-bug.png" />
       </div>
     </div>
-    <router-view />
+    <div id="foot" class="row">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -20,6 +22,8 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-image: url("./assets/grass.jpg");
+  height: 100vh;
 }
 
 #nav {
