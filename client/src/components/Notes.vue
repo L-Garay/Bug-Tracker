@@ -44,4 +44,12 @@ export default {
 </script>
 
 <style>
+td i {
+  color: red;
+}
+td i:hover {
+  color: red;
+  cursor: pointer;
+  text-shadow: 0 0 3px red;
+}
 </style>

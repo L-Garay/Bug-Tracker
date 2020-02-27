@@ -7,23 +7,19 @@
           <h5>Reported By: {{ bug.reportedBy }}</h5>
           <div class="d-flex">
             Status:
-            <p v-bind:class="{ closed: bug.closed, open: !bug.closed }">
-              {{ bug.closed ? "Closed" : "Open" }}
-            </p>
+            <p
+              v-bind:class="{ closed: bug.closed, open: !bug.closed }"
+            >{{ bug.closed ? "Closed" : "Open" }}</p>
           </div>
         </div>
         <p>{{ bug.description }}</p>
         <div>
           <button
             @click="toggleBugEdit"
-            class="btn btn-sm btn-info float-left"
+            class="btn btn-sm btn-success note-btn float-left"
             type="button"
-          >
-            Edit Bug
-          </button>
-          <button @click="closeBug" class="btn btn-sm btn-danger float-right">
-            Close Bug
-          </button>
+          >Edit Bug</button>
+          <button @click="closeBug" class="btn btn-sm btn-danger note-btn float-right">Close Bug</button>
         </div>
         <div v-if="editBugForm" class="editBugForm">
           <form @submit="editBug" class="form-group">
@@ -36,23 +32,15 @@
               maxlength="300"
               placeholder="What you want"
             ></textarea>
-            <button class="btn btn-sm btn-success" type="submit">
-              Submit Bug
-            </button>
+            <button class="btn btn-sm btn-success note-btn mt-2" type="submit">Submit Bug</button>
           </form>
         </div>
       </div>
       <div class="col-6 notes">
         <div class="row">
-          <div class="col-12 d-flex justify-content-between">
+          <div class="col-12 d-flex justify-content-between mb-1">
             <h2 class="bottom-border">Notes</h2>
-            <button
-              @click="toggleForm"
-              class="btn btn-sm btn-success"
-              type="button"
-            >
-              Add Note
-            </button>
+            <button @click="toggleForm" class="btn btn-success note-btn" type="button">Add Note</button>
           </div>
           <div class="col-12 mb-4" v-if="showForm">
             <div id="form">
@@ -74,9 +62,7 @@
                   maxlength="300"
                   placeholder="What you want"
                 ></textarea>
-                <button class="btn btn-sm btn-success" type="submit">
-                  Submit Note
-                </button>
+                <button class="btn btn-sm btn-success note-btn" type="submit">Submit Note</button>
               </form>
             </div>
           </div>
@@ -202,6 +188,9 @@ export default {
 };
 </script>
 <style scoped>
+.bugDetails {
+  margin-top: 10pt;
+}
 .details {
   display: flex;
   flex-direction: column;
@@ -214,5 +203,14 @@ export default {
 }
 .open {
   color: greenyellow;
+}
+.note-btn {
+  color: yellow;
+  border: 1pt solid yellow;
+}
+.note-btn:hover {
+  color: white;
+  border: 1pt solid white;
+  box-shadow: 3pt 3pt 3pt black;
 }
 </style>
