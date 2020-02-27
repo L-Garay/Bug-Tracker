@@ -33,11 +33,16 @@
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: yellow;
+}
+#nav a:hover {
+  font-weight: bold;
+  color: yellow;
+  text-shadow: 0 0 3px yellow;
 }
 
 #nav a.router-link-exact-active {
-  color: burlywood;
+  color: yellow;
 }
 .bug-logo {
   height: 30px;

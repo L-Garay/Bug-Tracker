@@ -1,7 +1,7 @@
 <template>
   <div class="home container-fluid">
     <div class="row">
-      <div class="col-12 d-flex justify-content-between pt-3">
+      <div class="col-12 d-flex justify-content-between pt-3 mb-3">
         <h2>Current Bug Report</h2>
         <button
           class="btn btn-success"
@@ -21,7 +21,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Create a Bug</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -59,8 +59,12 @@
                     placeholder="Describe the Problem"
                   ></textarea>
                 </div>
-                <button class="btn btn-success bug-submit-btn" type="submit">Submit Bug</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-success bug-submit-btn" type="submit">Submit</button>
+                <button
+                  type="button"
+                  class="btn btn-danger bug-close-btn"
+                  data-dismiss="modal"
+                >Close</button>
               </form>
             </div>
           </div>
@@ -68,7 +72,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 scrollMe">
         <table class="tableArea" style="width:100%">
           <tr>
             <th>Title</th>
@@ -184,11 +188,43 @@ th {
   margin: 8pt 0;
 }
 .bug-submit-btn {
+  margin: 15px 50pt 0 0;
+  color: yellow;
+  border: 1pt solid yellow;
+}
+.bug-submit-btn:hover {
+  margin: 15px 50pt 0 0;
+  box-shadow: 3pt 3pt 3pt black;
+  border: 1pt solid white;
+}
+.bug-close-btn {
   margin: 15px 0 0 0;
   color: yellow;
+  border: 1pt solid yellow;
+}
+.bug-close-btn:hover {
+  margin: 15px 0 0 0;
+  box-shadow: 3pt 3pt 3pt black;
+  border: 1pt solid white;
+}
+.home {
+  max-height: 80vh;
+  /* overflow-y: scroll; */
+}
+.scrollMe {
+  max-height: 80vh;
+  overflow-y: scroll;
 }
 .tableArea {
   background-color: rgb(255, 255, 255, 0.3);
-  max-height: 80vh;
+  max-height: 70vh;
+}
+.modal-header {
+  background-color: rgba(223, 247, 9, 0.7);
+}
+.modal-body {
+  background-color: rgb(0, 128, 0, 0.7);
+  color: white;
+  text-shadow: 1pt 1pt 2pt grey;
 }
 </style>
