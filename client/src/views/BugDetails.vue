@@ -2,7 +2,7 @@
   <div class="container-fluid bugDetails">
     <div class="row">
       <div class="col-6 details">
-        <h1>Title: {{ bug.title }}</h1>
+        <h1>Bug: {{ bug.title }}</h1>
         <div class="d-flex flex-row justify-content-between">
           <h5>Reported By: {{ bug.reportedBy }}</h5>
           <div class="d-flex">
