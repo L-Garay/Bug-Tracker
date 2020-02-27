@@ -4,7 +4,7 @@
       <div class="col-12 d-flex justify-content-between pt-3 mb-3">
         <h2>Current Bug Report</h2>
         <button
-          class="btn btn-success"
+          class="btn btn-success bug-close-btn"
           type="button"
           data-toggle="modal"
           data-target="#modal"
@@ -207,17 +207,25 @@ th {
   box-shadow: 3pt 3pt 3pt black;
   border: 1pt solid white;
 }
-.home {
-  max-height: 80vh;
-  /* overflow-y: scroll; */
+.close {
+  color: green;
 }
-.scrollMe {
+.close:hover {
+  color: red;
+  text-shadow: 0 0 3px red;
+  cursor: pointer;
+}
+/* .home {
   max-height: 80vh;
+  overflow-y: scroll;
+} */
+.scrollMe {
+  max-height: 75vh;
   overflow-y: scroll;
 }
 .tableArea {
   background-color: rgb(255, 255, 255, 0.3);
-  max-height: 70vh;
+  /* max-height: 50vh; */
 }
 .modal-header {
   background-color: rgba(223, 247, 9, 0.7);
